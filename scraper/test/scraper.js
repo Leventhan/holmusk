@@ -15,14 +15,14 @@ var scraper = require('../lib/scraper');
  */
 
 describe('scraper.js', function() {
-  describe('scrape', function () {
-    it('should scrape correctly', function (done) {
-        this.timeout(8000);
-        scraper.scrape({}, function(err, results) {
-            assert.equal(err, null);
-            assert.equal(20, results.length);
-            done();
-        });
+  describe('scrape', function() {
+    it('should scrape correctly', function(done) {
+      this.timeout(8000);
+      scraper.scrape({}, function(err, results) {
+        assert.equal(err, null);
+        assert.equal(20, results.length);
+        done();
+      });
     });
   });
 });

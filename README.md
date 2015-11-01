@@ -19,6 +19,7 @@ Fork this project, and do a `git clone` from your fork. The project directory sh
 			 |-- controllers/
 			 |-- models/
 		|-- config/
+|-- README.md
 
 ```
 
@@ -38,8 +39,9 @@ npm install
 node index.js {number of pages to scrape} {brand}
 
 ```
+> You can call `node index.js` without arguments to use the default 1, 'generic' parameters. Each page contains 20 food items.
 
-At this point, the food objects will have been saved into the API database. 
+At this point, the food objects will have been saved into the database. 
 
 ## API Routes
 
@@ -51,7 +53,9 @@ At this point, the food objects will have been saved into the API database.
 | POST /api/v1/foods                     | Create a new Food                 |
 | DELETE /api/v1/foods/:id               | Delete a single Food of given :id |
 
-For convenient testing, use [Postman](https://www.getpostman.com) and import [this Postman collection](https://www.getpostman.com/collections/fec63667ea5bceeec5b0).
+![](http://i.imgur.com/3UQ0qIW.gif)
+
+> For convenient testing, use [Postman](https://www.getpostman.com) and import [this Postman collection](https://www.getpostman.com/collections/fec63667ea5bceeec5b0).
 
 
 ## Running Tests
@@ -61,3 +65,11 @@ To run tests, run:
 ```
 mocha
 ```
+
+## Code Style Enforcement with JSCS
+
+![](https://github.com/SublimeLinter/SublimeLinter-jscs/raw/master/demo.gif)
+
+For a software team to be sure everyone follows consistent code style and conventions, it's important to have an automated linters to enforce best practices. To do this, we're using the [JSCS](https://github.com/SublimeLinter/SublimeLinter-jscs/) linter.
+
+If you're developing this project, you must have this installed. Otherwise, it's optional.
