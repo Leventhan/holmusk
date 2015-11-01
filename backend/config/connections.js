@@ -20,11 +20,5 @@
  */
 
 module.exports.connections = {
-  postgres: {
-    adapter: 'sails-postgresql',
-    host: 'localhost',
-    user: 'yosriady',
-    password: '',
-    database: 'holmusk'
-  }
+    // Database settings are kept in local.js for local development environments and production.js for production setup respectively.
 };
