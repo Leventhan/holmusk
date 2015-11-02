@@ -88,7 +88,6 @@ If you're developing this project, you **must** have this installed. Plugins are
 | GET /api/v1/foods                      | Get all Foods                     |
 | GET /api/v1/foods/:id                  | Find a single Food of a given :id |
 | POST /api/v1/foods                     | Create a new Food                 |
-| DELETE /api/v1/foods/:id               | Delete a single Food of given :id |
 
 > For convenient testing, use [Postman](https://www.getpostman.com) and import [this Postman collection](https://www.getpostman.com/collections/fec63667ea5bceeec5b0). Postman is a desktop API testing tool.
 

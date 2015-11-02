@@ -24,15 +24,16 @@ var DEFAULT_BRAND = 'generic';
  */
 
 module.exports = {
- /**
+  /*
   * Scrapes {pages} worth of a given {brand}'s' foods
   * @param brand name {String}
   * @param number of pages {Integer}
-  * @return collection of Food JSON objects {Array}
+  * @param on-completion callback {Function}
+  * @return collection of Food JSON objects {Array} within callback
   */
-  scrape: function(options, callback){
+  scrape: function(options, callback) {
     brand = options.brand || DEFAULT_BRAND;
-    pages = options.pages || DEFAULT_PAGES
+    pages = options.pages || DEFAULT_PAGES;
 
     x('http://www.myfitnesspal.com/nutrition-facts-calories/' + brand,
       '.food_search_results li', [{
@@ -43,14 +44,14 @@ module.exports = {
         }])
       .paginate('.next_page@href')
       .limit(pages)
-      (function (err, arr){
-        var foods = _.map(arr, function(food){
-            food.nutrition = parser.parseNutrition(food.nutrition);
-            return food;
+      (function(err, arr) {
+        var foods = _.map(arr, function(food) {
+          food.nutrition = parser.parseNutrition(food.nutrition);
+          return food;
         });
 
         callback(null, foods);
-      })
+      });
   }
 
-}
+};
