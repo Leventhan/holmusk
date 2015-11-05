@@ -1,4 +1,10 @@
 /**
+ * Module Dependencies
+ */
+
+var _ = require('underscore');
+
+/**
  * FoodController
  *
  * @description :: Server-side logic for managing foods
@@ -21,15 +27,24 @@ module.exports = {
       return res.badRequest('Missing required search term q.');
     }
 
-    Food.find({}, {select: ['name', 'id']})
-    .where({name: {contains: term}})
-    .limit(10)
-    .exec(function(err, results) {
-      if (err) {
-        return res.serverError(err);
+    ElasticSearchService.search({
+      index: 'foods',
+      type: 'food',
+      body: {
+        size: 10,
+        query: {
+          match: {
+            name: term
+          }
+        }
       }
-
+    }).then(function(body) {
+      var hits = body.hits.hits;
+      results = _.pluck(hits, '_source');
       res.ok(results);
+    }, function(error) {
+      res.serverError(error.message);
     });
+
   }
 };

@@ -29,7 +29,7 @@ module.exports = {
         rejectUnauthorized: false
       }
     }
-  }
+  },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *

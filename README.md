@@ -5,6 +5,33 @@ holmusk
 
 > This `README` documents whatever steps are necessary to get the application up and running.
 
+## Local Development Environment setup
+
+In your `local.js` file, you'll need to define an additional connections settings. Below is an example:
+
+> /backend/config/local.js
+
+```
+{
+  connections: {
+    postgres: {
+      adapter: 'sails-postgresql',
+      host: 'localhost',
+      port: 5432,
+      user: '<your username>',
+      password: '<your password>',
+      database: 'holmusk'
+    }
+  },
+  elasticsearch: {
+    host: 'localhost:9200',
+    log: 'trace'
+  }
+};
+```
+
+Production settings are specified through environment variables.
+
 ## Getting Started
 
 Have Node.js installed.
@@ -22,6 +49,7 @@ Fork this project, and do a `git clone` from your fork. The project directory sh
 			 |-- controllers/
 			 |-- models/
        |-- responses/
+       |-- services/
 		|-- config/
     |-- test/
     |-- app.js
@@ -48,37 +76,6 @@ node index.js {number of pages to scrape} {brand}
 > You can call `node index.js` without arguments to use the default 1, 'generic' parameters. Each page contains 20 food items.
 
 At this point, the food objects will have been saved into the database.
-
-## Local Development DB setup
-
-In your `local.js` file, you'll need to define an additional connections settings. Below is an example:
-
-> /backend/config/local.js
-
-```
-  connections: {
-    postgres: {
-      adapter: 'sails-postgresql',
-      host: 'localhost',
-      port: 5432,
-      user: '<your username>',
-      password: '<your password>',
-      database: 'holmusk'
-    }
-  }
-
-```
-
-Production settings are specified through environment variables.
-
-## Code Style Enforcement with JSCS
-
-For a software team to be sure everyone follows consistent code style and conventions, it's important to have an automated linters to enforce best practices. To do this, we're using the [JSCS](https://github.com/SublimeLinter/SublimeLinter-jscs/) linter. This project enforces the [Google Javascript Style Guide](https://github.com/jscs-dev/node-jscs/blob/master/presets/google.json).
-
-![](https://github.com/SublimeLinter/SublimeLinter-jscs/raw/master/demo.gif)
-
-If you're developing this project, you **must** have this installed. Plugins are available on all major code editors.
-
 
 ## API Routes
 
@@ -114,9 +111,35 @@ npm test
 
 Both the `scraper` and `backend` components are covered by tests.
 
+## Code Style Enforcement with JSCS
+
+For a software team to be sure everyone follows consistent code style and conventions, it's important to have an automated linters to enforce best practices. To do this, we're using the [JSCS](https://github.com/SublimeLinter/SublimeLinter-jscs/) linter. This project enforces the [Google Javascript Style Guide](https://github.com/jscs-dev/node-jscs/blob/master/presets/google.json).
+
+![](https://github.com/SublimeLinter/SublimeLinter-jscs/raw/master/demo.gif)
+
+If you're developing this project, you **must** have this installed. Plugins are available on all major code editors. In a real team setting, you can also define a git post-commit hook that runs a `jscs` grunt task to enforce all committers to strictly follow the style guide.
+
+
+## Deployment
+
+To deploy (i.e. on Heroku), you'll need to ensure that the following environment variables are defined (see `config/env/production.js` and `config/elasticsearch.js`):
+
+- `PG_HOSTNAME`
+- `PG_PORT`
+- `PG_USER`
+- `PG_PASSWORD`
+- `PG_DATABASE`
+- `ES_HOST`
+- `ES_LOG`
+
+> If you are on local development, make sure your `local.js` file contains the above variables.
+
+
 ## Credits
 
 Contributors:
 
 - Yos Riady ([http://yosriady.com](http://yosriady.com))
+
+[Trello board](https://trello.com/b/xsHMlw1d/holmusk-backend)
 
